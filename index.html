@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>简单页面</title>
+    <!-- 使用柔和、现代的风格 -->
+    <style>
+        /* 全局重置 & 字体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            color: #0f172a;
+        }
+
+        /* 主卡片 */
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 4px 18px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 头像 / 图标 */
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.30);
+            user-select: none;
+        }
+
+        /* 标题 */
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* 分割线 */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #a78bfa);
+            border-radius: 4px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* 描述文字 */
+        .description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            padding: 0 0.25rem;
+        }
+
+        /* 按钮组 */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: none;
+            background: #f1f5f9;
+            color: #0f172a;
+            cursor: pointer;
+            transition: 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn-primary {
+            background: #6366f1;
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.30);
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            border-color: #94a3b8;
+            background: #f8fafc;
+        }
+
+        /* 计数器 */
+        .counter-area {
+            background: #f1f5f9;
+            border-radius: 60px;
+            padding: 0.4rem 0.4rem 0.4rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .counter-area span {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #0f172a;
+            min-width: 1.8rem;
+            text-align: center;
+        }
+
+        .counter-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            border: none;
+            background: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: 0.15s ease;
+            color: #0f172a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .counter-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .counter-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* 页脚 */
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            border-top: 1px solid #e9edf2;
+            padding-top: 1.5rem;
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 400px) {
+            .card {
+                padding: 2rem 1.25rem;
+            }
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .counter-area {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- 头像（纯装饰） -->
+        <div class="avatar">✨</div>
+
+        <!-- 标题 -->
+        <h1>你好，世界</h1>
+        <p class="subtitle">一个简单而干净的页面</p>
+
+        <div class="divider"></div>
+
+        <!-- 描述 -->
+        <p class="description">
+            这是一个轻量级的 HTML 页面，包含基本的样式、按钮交互和一个小计数器。
+            你可以随意修改内容，或者作为你下一个项目的起点。
+        </p>
+
+        <!-- 操作按钮 -->
+        <div class="actions">
+            <button class="btn btn-primary" id="greetBtn">👋 打个招呼</button>
+            <button class="btn btn-outline" id="resetCounterBtn">↺ 重置</button>
+        </div>
+
+        <!-- 计数器 -->
+        <div class="counter-area">
+            <span>计数</span>
+            <span id="counterDisplay">0</span>
+            <button class="counter-btn" id="decrementBtn" aria-label="减少">−</button>
+            <button class="counter-btn" id="incrementBtn" aria-label="增加">+</button>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <span>用 ❤️ 制作 · </span>
+            <a href="#" onclick="alert('这是一个演示链接～'); return false;">了解更多</a>
+        </div>
+    </div>
+
+    <script>
+        // --- 交互逻辑 ---
+
+        // 1. 打招呼按钮
+        const greetBtn = document.getElementById('greetBtn');
+        greetBtn.addEventListener('click', () => {
+            alert('👋 你好！欢迎来到这个简单的页面。');
+        });
+
+        // 2. 计数器
+        let count = 0;
+        const counterDisplay = document.getElementById('counterDisplay');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const decrementBtn = document.getElementById('decrementBtn');
+        const resetBtn = document.getElementById('resetCounterBtn');
+
+        function updateCounter() {
+            counterDisplay.textContent = count;
+            // 简单的视觉反馈：数字变化时微动
+            counterDisplay.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                counterDisplay.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        incrementBtn.addEventListener('click', () => {
+            count += 1;
+            updateCounter();
+        });
+
+        decrementBtn.addEventListener('click', () => {
+            count -= 1;
+            updateCounter();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            updateCounter();
+        });
+
+        // 键盘辅助 (可选)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === '=') {
+                e.preventDefault();
+                count += 1;
+                updateCounter();
+            } else if (e.key === 'ArrowDown' || e.key === '-') {
+                e.preventDefault();
+                count -= 1;
+                updateCounter();
+            } else if (e.key === 'r' || e.key === 'R') {
+                // 按 R 键重置 (但不要干扰输入框)
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    count = 0;
+                    updateCounter();
+                }
+            }
+        });
+
+        // 小彩蛋：双击标题重置计数 (但保留给用户)
+        const title = document.querySelector('h1');
+        title.addEventListener('dblclick', () => {
+            count = 0;
+            updateCounter();
+            // 微反馈
+            title.style.transition = 'color 0.15s';
+            title.style.color = '#6366f1';
+            setTimeout(() => {
+                title.style.color = '';
+            }, 300);
+        });
+
+        // 初始化计数器显示
+        updateCounter();
+
+        // 控制台提示 (友好)
+        console.log('✨ 简单页面已加载！试试点击按钮或使用键盘：↑/↓ 增减，R 重置。');
+    </script>
+
+</body>
+</html>
